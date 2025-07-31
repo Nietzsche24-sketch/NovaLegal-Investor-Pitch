@@ -1,0 +1,10 @@
+⚠️ Current Pain Points in the LegalTech Market:
+
+- ❌ Tools require internet to function
+- ❌ No local-first privacy or data ownership
+- ❌ No court bundle generators at all
+- ❌ Most tools hallucinate or lack legal explainability
+- ❌ Legal outputs (PDFs, summaries) not formatted for use
+- ❌ No Ontario-specific tools — all US-focused
+
+NovaLegal directly addresses each of these with precision tooling built for real legal workflows.

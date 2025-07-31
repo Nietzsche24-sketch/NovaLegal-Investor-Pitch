@@ -1,0 +1,11 @@
+NovaLegal Product Highlights:
+
+✅ Clause Timeline Generator  
+✅ AI-Powered Risk Flagging  
+✅ Full Contract Summarization (Local GPT-4 Compatible)  
+✅ Court Bundle Formatter (Ontario Standard)  
+✅ Redline Diff & Clause Comparison  
+✅ Precedent Loader (PDF, CSV)  
+✅ CanLII Case Law Matching  
+✅ Offline HTML & PDF Reports  
+✅ Fully Local CLI Automation

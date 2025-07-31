@@ -1,0 +1,7 @@
+NovaLegal is the offline-first, court-grade legal assistant for real lawyers — not a GPT toy for AI tourists.
+
+It builds what other tools pretend to: contract clause analysis, bundle generation, risk flagging, and real outputs that matter in Ontario courtrooms.
+
+Designed for mid-sized firms, real estate practitioners, and power-of-sale experts, NovaLegal runs fully locally, doesn't hallucinate, and gives full control to the lawyer.
+
+It’s not chasing the AI hype cycle — it’s solving the grunt work law firms actually pay for.

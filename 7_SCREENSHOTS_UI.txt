@@ -1,0 +1,8 @@
+Include the following screenshots:
+
+1. Terminal-based bundle generation
+2. Risk flag output with clause highlighter
+3. Comparison view (NovaLegal vs. source contract)
+4. CanLII matched case snippets
+5. Redline diff interface
+6. Final court-ready PDF preview

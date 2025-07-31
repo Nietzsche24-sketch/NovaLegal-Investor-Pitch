@@ -1,0 +1,5 @@
+NovaLegal is a precision-built legal automation platform focused on offline, clause-based legal work.
+
+It supports Ontario lawyers with features like contract clause extraction, redlining, precedent matching, and full court bundle generation — all locally, no cloud, no risk.
+
+Unlike others, NovaLegal doesn’t offer gimmicks. It delivers results that lawyers can trust, print, and file in court — no hallucinations, no dependencies.
