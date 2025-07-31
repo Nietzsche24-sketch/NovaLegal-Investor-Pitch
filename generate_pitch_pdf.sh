@@ -1,47 +1,52 @@
 #!/bin/bash
 
-HTML_FILE="nova_pitch_landing.html"
-PDF_FILE="NovaLegal_Comparison.pdf"
+# Paths
+OUTPUT_HTML="NovaLegal_Investor_Pitch_Deck_FULL.html"
+OUTPUT_PDF="NovaLegal_Investor_Pitch_Deck_FULL.pdf"
+INPUT_DIR="./NovaLegal_Pitch_Package"
 
-# Check dependencies
-if ! command -v node &> /dev/null; then
-    echo "❌ Node.js is not installed. Install it first."
-    exit 1
-fi
-
-if ! node -e "require('playwright')" &> /dev/null; then
-    echo "❌ Playwright not found. Run: npm install playwright"
-    exit 1
-fi
-
-if [ ! -f "$HTML_FILE" ]; then
-    echo "❌ Error: $HTML_FILE not found in this directory."
-    exit 1
-fi
-
-# Define inline Node.js script
-NODE_SCRIPT=$(cat <<'EOF'
-const { chromium } = require('playwright');
-
-(async () => {
-    const browser = await chromium.launch();
-    const page = await browser.newPage();
-    await page.goto(`file://${process.cwd()}/nova_pitch_landing.html`, { waitUntil: 'networkidle' });
-    await page.pdf({ path: 'NovaLegal_Comparison.pdf', format: 'A4', printBackground: true });
-    await browser.close();
-})();
+# Start the HTML file
+cat > "$OUTPUT_HTML" <<EOF
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>NovaLegal Investor Pitch Deck</title>
+  <style>
+    body { font-family: Helvetica, sans-serif; margin: 2rem; line-height: 1.6; }
+    h1, h2 { color: #003366; }
+    pre { background: #f4f4f4; padding: 1em; overflow-x: auto; }
+    hr { margin: 2em 0; }
+  </style>
+</head>
+<body>
+  <h1>NovaLegal Investor Pitch Deck</h1>
+  <p><em>Auto-generated: $(date)</em></p>
+  <hr>
 EOF
-)
 
-# Save + run the script
-echo "$NODE_SCRIPT" > _render_temp.js
-node _render_temp.js
-rm _render_temp.js
+# Append each text file
+for f in "$INPUT_DIR"/*.txt; do
+  echo "  <h2>$(basename "$f")</h2>" >> "$OUTPUT_HTML"
+  echo "  <pre>" >> "$OUTPUT_HTML"
+  cat "$f" >> "$OUTPUT_HTML"
+  echo "  </pre><hr>" >> "$OUTPUT_HTML"
+done
 
-# Verify
-if [ -f "$PDF_FILE" ]; then
-    echo "✅ PDF successfully created: $PDF_FILE"
+# Embed PDF summary link
+echo "<h2>PDF Comparison</h2>" >> "$OUTPUT_HTML"
+echo "<p>See <a href=\"NovaLegal_Comparison.pdf\">NovaLegal_Comparison.pdf</a> for the Spellbook breakdown.</p>" >> "$OUTPUT_HTML"
+
+# End HTML
+echo "</body></html>" >> "$OUTPUT_HTML"
+
+# Convert HTML to PDF (requires wkhtmltopdf)
+if command -v weasyprint &> /dev/null; then
+  weasyprint "$OUTPUT_HTML" "$OUTPUT_PDF"
+  echo "✅ PDF generated with WeasyPrint: $OUTPUT_PDF"
 else
-    echo "❌ PDF generation failed."
-    exit 1
+  echo "⚠️ Install wkhtmltopdf to enable PDF output:"
+  echo "  brew install wkhtmltopdf"
 fi
+
+echo "✅ Done. Final deck: $OUTPUT_HTML"
